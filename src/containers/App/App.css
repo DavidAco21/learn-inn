@@ -1,0 +1,16 @@
+.backgroundApp{
+    display: flex;
+    min-height: 100vh;
+    background-image: url(/src/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:local;
+    overflow: hidden;
+    
+
+  
+    
+    
+
+    
+}

@@ -1,0 +1,52 @@
+.card_login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.image_login{
+    margin-right: 19%;
+  
+ 
+}
+
+
+.text_daddy{
+    text-align: center;
+    justify-items: center;
+    
+      
+}
+
+
+.user_text{
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1.2em;
+    line-height: 1px;
+    margin-right: 30%;
+
+
+}
+
+.user_description{
+    font-size: 1em;
+    font-family: Lato;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 0.8em;
+    text-align: center;
+
+    color: #969696;
+
+width: 70%;
+
+}
+
+.p-button-raised {
+    background-color: var(--blue-500);
+    margin-right: 29%;
+    
+} 
