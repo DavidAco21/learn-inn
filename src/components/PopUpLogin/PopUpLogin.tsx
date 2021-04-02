@@ -2,30 +2,31 @@ import React, { useState } from 'react';
 import 'primereact/resources/themes/saga-blue/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
-import './UserLogin.css'
 import { Button } from 'primereact/button'
 import { InputText } from 'primereact/inputtext'
 import { Card } from 'primereact/card';
+import Popup from 'reactjs-popup';
 
 
 
 interface PopUpLoginProps{
-    user: string;
+    userPopUp: string;
     
    
 }
 
 
-
-export const UserLogin: React.FC<PopUpLoginProps> = ({ user,  }) => {
+export const PopUpLogin: React.FC<PopUpLoginProps> = ({ userPopUp }) => {
 
     const [text, setText] = useState('');
 
 
     return (<div className="pop_up"> 
 
+    
+
                     <Card>
-                        <p>Estas ingresando como{user}</p>
+                        <p>Estas ingresando como{userPopUp}</p>
                         <p>Bienvenido {text}</p>
                         <InputText id="popup" value={text} onChange={(e) => setText(text)} />
                          <label htmlFor="popup">Tu Nombre</label>
@@ -35,9 +36,7 @@ export const UserLogin: React.FC<PopUpLoginProps> = ({ user,  }) => {
                     </Card>
                             
 
-       
-           
-
+    
  
 
     </div>)
