@@ -5,30 +5,29 @@ import 'primeicons/primeicons.css';
 import './UserLogin.css'
 import { Button } from 'primereact/button'
 import CSS from 'csstype'
-import { PopUpLogin } from '../../components/PopUpLogin/PopUpLogin';
 import Popup from 'reactjs-popup';
 import BaseModalWrapper from '../Modal/BaseModalWrapper';
-
-
+import { Route, useHistory} from 'react-router-dom';
+import { Home } from '../../containers/Home/Home';
 
 interface UserLoginProps{
 
     image:  string;
     user:   string;
-    content: string;  
-    OnButtonClick: () => void;
+    content: string; 
+    onLoginClick: () => void;
    
 }
 
+export const UserLogin: React.FC<UserLoginProps> = ({ image, user, content, onLoginClick}) => {
 
-export const UserLogin: React.FC<UserLoginProps> = ({ image, user, content, OnButtonClick}) => {
 
     const [isModalVisible, setIsModalVisible] = useState(false)
 
     const toggleModal = () => {
         setIsModalVisible(wasModalVisible =>  !wasModalVisible)
       }
- 
+
 
     
     return (<div className="card_login"> 
@@ -41,14 +40,11 @@ export const UserLogin: React.FC<UserLoginProps> = ({ image, user, content, OnBu
             
                      <Button label="Ingresar" className="p-button-raised p-button-rounded" onClick = {toggleModal} />
                      
-                     <BaseModalWrapper isModalVisible={isModalVisible} onBackDropClick={toggleModal}/>
+                     <BaseModalWrapper user = {user} isModalVisible={isModalVisible} onBackDropClick={toggleModal} 
+                     onLoginClick = {onLoginClick} />
             
 
                 </div>
-
-                
-
-
 
 
     </div>)

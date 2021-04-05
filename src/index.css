@@ -1,5 +1,25 @@
-.backgroundIndex{
-    width: 100%;
+.backgroundApp{
+    display: flex;
+    min-height: 100vh;
+    background-image: url(/src/images/background.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:local;
+    overflow: hidden;
+
+    position: fixed;
     height: 100%;
-    background-color: blue;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+        
+
+  
+    
+    
+
+    
 }

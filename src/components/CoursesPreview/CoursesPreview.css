@@ -1,0 +1,66 @@
+
+.nav-courses-items{
+    display: flex;
+    align-items: right;
+    flex-direction: column;
+    position: sticky;
+    width: 20%;
+    height: 100vh;
+
+    background: radial-gradient(103.58% 98.07% at -7.46% 1.93%, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.42) 100%);
+    border: 1px solid #FFFFFF;
+    box-sizing: border-box;
+    backdrop-filter: blur(20px);
+    transition: width 1000ms ease-in-out;
+
+}
+
+.title{
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 29px;
+    margin-top: 3em;
+    margin-left: 10%;
+
+}
+
+.course-icon{
+    display: flex;
+    flex-direction: row;
+    padding: 0rem 0rem 2rem 0rem;
+    list-style: none;
+    font-family: Gilroy;
+    font-style: normal;
+    font-weight: 800;
+    font-size: 1rem;
+    line-height: 29px;
+    
+    
+
+    margin-left: 10%;    
+}
+
+*{
+    text-decoration: none;
+}
+
+.course-div{ 
+
+    display: flex;
+    flex-direction: row;
+    padding: 1.3rem 4rem 1.3rem 2rem;
+    background: #FFFFFF;
+    filter: drop-shadow(0px 4px 0px rgba(0, 0, 0, 0.05));
+    border-radius: 5px;
+    color: black;
+    
+
+}
+
+.pi-cloud{
+    color:var(--blue-500);
+    margin-right: 1.3em;
+
+}

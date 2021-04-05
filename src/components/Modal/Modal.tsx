@@ -4,9 +4,10 @@ import styled from 'styled-components';
 
 interface ModalProps {
     onBackDropClick: () => void;
+    
 }
 const Overlay = styled.div`
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
   position: fixed;
   height: 100%;
   width: 100%;
@@ -15,18 +16,18 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(10px);
+
 `
 
 const Modal: React.FC<ModalProps> = ({onBackDropClick, children}) => {
 
     
-
     return ReactDOM.createPortal(<Overlay onClick = {onBackDropClick}>
         <div onClick={e => e.stopPropagation()}>
         {children}
         </div>
-        
-        
+              
 
     </Overlay>, document.getElementById('modal-root')!);
 

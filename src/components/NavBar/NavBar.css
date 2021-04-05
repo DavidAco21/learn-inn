@@ -1,0 +1,162 @@
+
+
+.navBar{
+   
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    padding: 0rem 2rem 2rem 2rem;
+    background-color: white;
+    box-shadow: 1px 0 0 rgba(22, 8, 43, .1);
+    z-index: 3;
+    transition: .4s;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: auto;
+   
+}
+
+.navBar::-webkit-scrollbar {
+    display: none;
+}
+
+.icon-title{
+    display: flex;
+    flex-direction: row;
+}
+
+.navBar:hover {
+    width: var(--nav-width);
+  }
+
+
+
+.nav-items{
+    display: flex;
+    row-gap: 1.7rem;
+    justify-content: space-between;
+    align-items: center;
+    height: 3.75rem;
+
+    text-decoration: none;
+    color:  #A5A1AA;
+    font-family: var(--body-font);
+    font-size: 1rem;
+}
+
+
+
+
+.nav-titles{
+    
+    font-weight: 500;
+    white-space: nowrap;
+    font-size: .75rem;
+    padding: 0%;
+    margin-top: .3rem;
+}
+
+.nav-titles:hover{
+    color:var(--blue-500);
+
+}
+
+.navItems{
+    display: flex;
+    flex-direction: column;
+    row-gap: 2.5rem;
+    letter-spacing: .1rem;
+    font-size: 1.5rem;
+    
+}
+
+
+
+.pi-home{
+    color:var(--surface-500);
+    transition: color .5s;
+    margin-right: .9rem;
+    
+}
+.pi-home:hover  {
+    color:var(--blue-500);
+
+}
+
+.pi-book{
+    color:var(--surface-500);
+    margin-left: 0;
+    transition: color .5s;
+    margin-right: .9rem;
+    
+}
+
+.pi-book:hover {
+    color:var(--blue-500);
+
+}
+
+
+.pi-comments{
+    color:var(--surface-500);
+    margin-left: 0;
+    transition: color .5s;
+    margin-right: .9rem;
+}
+
+.pi-comments:hover {
+    color:var(--blue-500);
+
+}
+
+.pi-cog{
+    color:var(--surface-500);
+    margin-left: 0;
+    margin-right: .9rem;
+    transition: color .5s;
+}
+
+.pi-cog:hover{
+    color:var(--blue-500);
+
+}
+
+
+.pi-sign-out{
+    color:var(--surface-500);
+    margin-left:0;
+    margin-right: .9rem;
+    margin-top: 9rem;
+    transition: color .5s;
+
+}
+
+.pi-sign-out:hover{
+    color:var(--blue-500);
+
+}
+
+.nav-icon{
+    text-decoration: none;
+    list-style: none;
+    
+}
+
+.nav-icon:focus{
+    color: black;
+}
+
+
+.courses-menu{
+   
+    transition: 10% 350ms ease-out;
+    width: 0%;
+    display: none;
+    
+}
+
+
+
