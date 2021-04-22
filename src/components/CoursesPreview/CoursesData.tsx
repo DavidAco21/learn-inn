@@ -1,19 +1,28 @@
-import React from 'react';
+import React from "react";
+import Avatar from "@material-ui/core/Avatar";
 
 export const CoursesData = [
-    {
-      title: 'Curso 1',
-      path: '/courses/curso1',
-      icon: <i className="pi pi-cloud " style={{'fontSize': '2em'} }></i> ,
-      cName: 'course-icon'
-    },
+  {
+    title: "Clase 1",
+    id: 1,
+    icon: "C1",
+    path :"/courses/",
+    cName: "course-icon",
+  },
 
-    {
-        title: 'Curso 2',
-        path: '/courses/curso2',
-        icon: <i className="pi pi-cloud " style={{'fontSize': '2em'} }></i> ,
-        cName: 'course-icon'
-      },
+  {
+    id: 2,
+    title: "Clase 2",
+    icon: "C2",
+    path :"/courses/",
+    cName: "course-icon",
+  },
 
-    
-  ];
+  {
+    id: 3,
+    title: "Clase 3",
+    icon: "C3",
+    path :"/courses/",
+    cName: "course-icon",
+  },
+];

@@ -82,7 +82,7 @@
     
 }
 .pi-home:hover  {
-    color:var(--blue-500);
+    color: #3D5AFE;
 
 }
 
@@ -95,7 +95,7 @@
 }
 
 .pi-book:hover {
-    color:var(--blue-500);
+    color: #3D5AFE;
 
 }
 
@@ -108,7 +108,7 @@
 }
 
 .pi-comments:hover {
-    color:var(--blue-500);
+   color: #3D5AFE;
 
 }
 
@@ -120,7 +120,7 @@
 }
 
 .pi-cog:hover{
-    color:var(--blue-500);
+   color: #3D5AFE;
 
 }
 
@@ -135,7 +135,7 @@
 }
 
 .pi-sign-out:hover{
-    color:var(--blue-500);
+   color: #3D5AFE;
 
 }
 
