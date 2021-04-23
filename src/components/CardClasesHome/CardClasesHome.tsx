@@ -21,6 +21,7 @@ interface CardClasesHomeProps {
   title_video: string;
   clase: string;
   icon: string;
+  
 }
 
 const useStyle = makeStyles((theme: Theme) =>
