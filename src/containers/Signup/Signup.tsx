@@ -14,8 +14,6 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import image_professor from "/Users/jedidiaszapata/Desktop/learn-inn/src/images/renders/profesor.png";
-import image_student from "/Users/jedidiaszapata/Desktop/learn-inn/src/images/renders/estudiante.png";
 import { Tabs } from "material-ui";
 import { UserContext } from "../../utils/UserContext";
 import clsx from "clsx";
