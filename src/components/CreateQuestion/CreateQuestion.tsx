@@ -20,6 +20,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { MultipleOp } from "./MultipleOp";
+import {QuestionType} from "../../utils/QuestionType";
 
 interface CreateQuestionProps {
   isModalVisible: Boolean;
@@ -106,6 +107,15 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
   const handleType = (event: React.ChangeEvent<{ value: unknown }>) => {
     setType(event.target.value as string);
   };
+
+  // function buildQuestionType (questionT: QuestionType) {
+  // }
+  // const handleSubmit = () =>{
+  //   buildQuestionType({
+  //     name : "Pregunta"
+      
+  //   })
+  // }
 
   const handleNewOption = () => {
       <MultipleOp> </MultipleOp>
@@ -230,6 +240,7 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={handleSubmit}
               >
                 Finalizar
               </Button>
