@@ -198,8 +198,8 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                           Tipo de respuesta
                         </MenuItem>
                         <MenuItem value={1}>Opción múltiple</MenuItem>
-                        <MenuItem value={2}>Texto e Imágen</MenuItem>
-                        <MenuItem value={3}>Verdader o Falso</MenuItem>
+                        <MenuItem value={2}>Texto e Imagen</MenuItem>
+                        <MenuItem value={3}>Verdadero o Falso</MenuItem>
                         <MenuItem value={4}>Respuesta corta</MenuItem>
                       </Select>
                     </FormControl>

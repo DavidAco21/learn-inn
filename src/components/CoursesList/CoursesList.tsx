@@ -2,7 +2,7 @@ import React, { FC, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavBarItem } from "../../utils/NavBarItem";
 
-import "/Users/jedidiaszapata/Desktop/learn-inn/src/components/NavBar/NavBar.css";
+import '../NavBar/NavBar.css';
 
 interface CoursesListProps {
   item: NavBarItem;

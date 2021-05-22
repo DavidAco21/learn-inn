@@ -10,11 +10,13 @@ import {
   Paper,
   Grid,
 } from "@material-ui/core";
-import { Video } from "ractive-player";
+import Video from "ractive-player";
 import ReactPlayer from "react-player";
 import AddIcon from "@material-ui/icons/Add";
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import PropTypes from 'prop-types'; 
+
 
 import MenuItem from "@material-ui/core/MenuItem";
 import { CreateQuestion } from "../../components/CreateQuestion/CreateQuestion";
@@ -110,9 +112,10 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
     prevOpen.current = open;
   }, [open]);
 
+
   return (
     <Grid container className={classes.grid} >
-         
+
       <Grid item className={classes.video} xs={10} >
         <ReactPlayer
           
@@ -125,6 +128,7 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
         ></ReactPlayer>
         <CreateQuestion isModalVisible={isModalVisible} onBackDropClick={toggleModal} />
       </Grid>
+
 
       <Grid item xs={1} className={classes.floating}>
         <Fab
@@ -176,12 +180,7 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
         </Popper>
       </Grid>
 
-      {/* <Video start={"my-video"}>
-          <source
-            src= {'/Users/jedidiaszapata/Desktop/learn-inn/src/videos/monkdaTuto.mp4'}
-            type="video/mp4"
-          />
-        </Video> */}
+      
     </Grid>
   );
 };
