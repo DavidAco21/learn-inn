@@ -21,6 +21,7 @@ interface CardClasesHomeProps {
   title_video: string;
   clase: string;
   icon: string;
+
 }
 
 const useStyle = makeStyles((theme: Theme) =>
@@ -53,7 +54,7 @@ const useStyle = makeStyles((theme: Theme) =>
     },
 
     edit: {
-      width: "100%",
+      width: "99%",
     },
   })
 );

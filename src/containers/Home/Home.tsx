@@ -5,8 +5,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
-import image_banner from "/Users/jedidiaszapata/Desktop/learn-inn/src/images/renders/saly.png";
-import miniVideo from "/Users/jedidiaszapata/Desktop/learn-inn/src/images/renders/miniVideo.png";
+import image_banner from "../../images/renders/saly.png";
+import miniVideo from "../../images/renders/miniVideo.png";
 import {
   createStyles,
   makeStyles,
