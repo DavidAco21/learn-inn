@@ -30,22 +30,36 @@ import { lightTheme } from "../../theme/appTheme";
 import { LoginSign } from "../LoginSign/LoginSign";
 import { Curso } from "../Curso/Curso";
 import { VideoEdit } from "../VideoEdit/VideoEdit";
+import { LEARNIN_COLLECTION } from "../../utils/firebase";
+
+LEARNIN_COLLECTION.collection('questions').add (
+  {
+
+  name: "que le pasa a Lupita?",
+  description: " ",
+  duration: 20,
+  type: 'multipleChoice',
+
+  option: {
+    multipleChoice: [
+      {
+        answer: "No se",
+        rightAnswer: true,
+      },
+
+      {
+        answer: "Si sé",
+        rightAnswer: false,
+      }
+    ],
+   
+  },
+
+    
 
 
-declare const firebase: any;
-const firebaseConfig = {
-  apiKey: "AIzaSyC3x5GCNvK8KBU1buRi4KSfi1sExYORuY4",
-  authDomain: "learnin-5f9e8.firebaseapp.com",
-  projectId: "learnin-5f9e8",
-  storageBucket: "learnin-5f9e8.appspot.com",
-  messagingSenderId: "266191199349",
-  appId: "1:266191199349:web:8ac3737bfaa5e623426c3c",
-  measurementId: "G-MTJG28BZM2",
-};
-
-firebase.initializeApp(firebaseConfig);
-export default firebase
-
+    }
+)
 
 
 export const App = () => {

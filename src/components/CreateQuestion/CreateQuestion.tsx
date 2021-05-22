@@ -97,23 +97,56 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
   const classes = useStyle();
 
   const [time, setTime] = React.useState("");
-  const [type, setType] = React.useState("");
+  const [type, setType] = React.useState(-1);
 
   const handleTime = (event: React.ChangeEvent<{ value: unknown }>) => {
     setTime(event.target.value as string);
   };
 
+  const categorias = [
+    {
+      "nombre": "Opción Múltiple",
+      "componente": [ <Grid item xs={12}>
+                     <MultipleOp >  </MultipleOp>
+                     </Grid> ]
+    },
+    {
+      "nombre": "Verdadero o Falso",
+      "componente": [ <Grid item xs={12}>
+                     <p> Verdadero o Falso </p>
+                     </Grid> ]
+    },
+
+    {
+      "nombre": "Respuesta Corta",
+      "componente": [ <Grid item xs={12}>
+                     <p> Respuesta corta </p>
+                     </Grid> ]
+    }
+  ]
+
+  const handlerAnswerType = (e: any) => {
+    const opcion = e.target.value;
+    setType(opcion);
+  }
+ 
+
   const handleType = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setType(event.target.value as string);
+    setType(event.target.value as number); 
+        
+        console.log(type)
+ 
+   
   };
 
-  const handleNewOption = () => {
-      <MultipleOp> </MultipleOp>
-      }
+
+
 
   if (!isModalVisible) {
     return null;
   }
+
+ 
 
   return (
     <ModalVideo onBackDropClick={onBackDropClick}>
@@ -170,7 +203,10 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                         displayEmpty
                         className={classes.selectEmpty}
                         inputProps={{ "aria-label": "Without label" }}
+
+                        
                       >
+                        
                         <MenuItem value="" disabled>
                           Duración
                         </MenuItem>
@@ -188,41 +224,54 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                       variant="filled"
                     >
                       <Select
+
                         value={type}
                         onChange={handleType}
+                        onClick = {handlerAnswerType}
                         displayEmpty
                         className={classes.selectEmpty}
                         inputProps={{ "aria-label": "Without label" }}
+
                       >
-                        <MenuItem value="" disabled>
-                          Tipo de respuesta
-                        </MenuItem>
-                        <MenuItem value={1}>Opción múltiple</MenuItem>
-                        <MenuItem value={2}>Texto e Imagen</MenuItem>
-                        <MenuItem value={3}>Verdadero o Falso</MenuItem>
-                        <MenuItem value={4}>Respuesta corta</MenuItem>
+                        
+                        <MenuItem value={-1} disabled>  Tipo de respuesta </MenuItem>
+                        {categorias.map((item, index) => (
+                         
+                        <MenuItem key = {"categoria"+ index} value={index}> {item.nombre}</MenuItem>
+                        
+
+                        ))}
+                        
                       </Select>
+                      {/* <MenuItem value={2}>Verdadero o Falso</MenuItem>
+                        <MenuItem value={3}>Respuesta corta</MenuItem> */}
                     </FormControl>
                   </Grid>
                 </Grid>
 
                 <Grid item xs={12}>
-                  <MultipleOp></MultipleOp>
-                </Grid>
-                <Grid item xs={12}>
-                  <MultipleOp></MultipleOp>
-                </Grid>
-                <Grid item xs={12}>
-                  <MultipleOp></MultipleOp>
-                </Grid>
 
-                {/* <Grid item xs={9}>
-                  <TextField
-                    fullWidth
-                    label="Agregar Opción "
-                    onClick={handleNewOption}
-                  />
-                </Grid> */}
+                {
+                  type > -1 &&
+                  (
+                    categorias[type].componente.map((item, index)=>(
+
+                      <MenuItem key = {"componente"+index} value = ""> {item}</MenuItem>
+                    
+                    
+                    ))
+                  )
+                }
+                  
+                </Grid>
+                 {/* <Grid item xs={12}>
+                  <MultipleOp></MultipleOp>
+                </Grid>
+                <Grid item xs={12}>
+                  <MultipleOp></MultipleOp>
+                </Grid>  */}
+
+            
               </Grid>
               <Button
                 type="submit"

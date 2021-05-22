@@ -12,8 +12,7 @@ import {
 import Typography from "@material-ui/core/Typography";
 
 import { useParams, useHistory } from "react-router";
-import { VideosPreview } from "../videosPreview/videosPreview";
-import firebase from "../../utils/firebase";
+
 
 interface UploadVideoProps {}
 
