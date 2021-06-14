@@ -47,6 +47,7 @@ import {
             <TextField
               fullWidth
               label="El estudiante debe escribir aquí"
+              disabled
             />
 
   

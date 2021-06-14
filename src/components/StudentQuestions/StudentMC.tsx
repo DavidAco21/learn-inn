@@ -25,10 +25,10 @@ import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Divider from "@material-ui/core/Divider";
+import { QuestionType } from "../../utils/QuestionType";
 
 interface StudentMCProps {
-  isModalVisible: Boolean;
-  onBackDropClick: () => void;
+  question: QuestionType;
 }
 
 const useStyle = makeStyles((theme: Theme) =>
@@ -93,43 +93,9 @@ const useStyle = makeStyles((theme: Theme) =>
 );
 
 export const StudentMC: React.FC<StudentMCProps> = ({
-  isModalVisible,
-  onBackDropClick,
+  question
 }) => {
   const classes = useStyle();
-
-  const [progress, setProgress] = React.useState(0);
-  const [buffer, setBuffer] = React.useState(0);
-
-  const progressRef = React.useRef(() => {});
-  React.useEffect(() => {
-    progressRef.current = () => {
-      if (progress > 100) {
-        setProgress(0);
-        setBuffer(10);
-      } else {
-        const diff = Math.random() * 10;
-        const diff2 = Math.random() * 10;
-        setProgress(progress + diff);
-        setBuffer(progress + diff + diff2);
-      }
-    };
-  });
-
-  let duration: any;
-
-  Questions.map((item) => {
-    if (item.id == 0) duration = item.duration;
-  });
-
-  React.useEffect(() => {
-    const timer = setInterval(() => {
-      progressRef.current();
-    }, duration * 100);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
 
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
 
@@ -140,76 +106,28 @@ export const StudentMC: React.FC<StudentMCProps> = ({
     setSelectedIndex(index);
   };
 
-  if (!isModalVisible) {
-    return null;
-  }
-
-  return (
-    <ModalVideo onBackDropClick={onBackDropClick}>
-      <Card className={classes.glass}>
-        <CardContent className={classes.content}>
-          {Questions.map((item) => {
-            if (item.id == 0) {
-              return (
-                <Grid container direction="column" key={item.id}>
-                  <Grid item className={classes.top}>
-                    <Typography
-                      component="h5"
-                      variant="h1"
-                      className={classes.name}
-                    >
-                      {item.name}
-                    </Typography>
-                    <Typography component="p" className={classes.time}>
-                      {item.duration}
-                    </Typography>
-                  </Grid>
-                  {item.options.map((option, index) => {
-                    return (
-                      <Grid item key={index} xs={12}>
-                        {/*  <Typography variant="h5" className={classes.option}>
-                          {option.text}
-                        </Typography> */}
-
-                        <List
-                          component="nav"
-                          className={classes.list}
-                          aria-label="mailbox folders"
-                        >
-                          <ListItem
-                            button
-                            selected={selectedIndex === index}
-                            onClick={(event) =>
-                              handleListItemClick(event, index)
-                            }
-                          >
-                            <ListItemText primary={option.text} />
-                          </ListItem>
-                          <Divider />
-                        </List>
-                      </Grid>
-                    );
-                  })}
-                  <LinearProgress
-                    variant="buffer"
-                    value={progress}
-                    valueBuffer={buffer}
-                    className = {classes.line}
-                  />
-                  <Button
-                    className={classes.buttonBlue}
-                    variant="contained"
-                    color="primary"
-                    disableElevation
-                  >
-                    Enviar Respuesta
-                  </Button>
-                </Grid>
-              );
-            }
-          })}
-        </CardContent>
-      </Card>
-    </ModalVideo>
-  );
+  return (<>
+    {question.options?.map((option, index) => {
+      return (
+        <Grid item key={index} xs={12}>
+          <List
+            component="nav"
+            className={classes.list}
+            aria-label="mailbox folders"
+          >
+            <ListItem
+              button
+              selected={selectedIndex === index}
+              onClick={(event) =>
+                handleListItemClick(event, index)
+              }
+            >
+              <ListItemText primary={option.text} />
+            </ListItem>
+            <Divider />
+          </List>
+        </Grid>
+      );
+    })}
+  </>);
 };

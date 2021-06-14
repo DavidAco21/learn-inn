@@ -164,7 +164,7 @@ import {
                         {item.duration}
                       </Typography>
                     </Grid>
-                    {item.options.map((option, index) => {
+                    {item.options?.map((option, index) => {
                       return (
                         <Grid item key={index} xs={12}>
                           {/*  <Typography variant="h5" className={classes.option}>
