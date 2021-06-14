@@ -12,7 +12,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AddIcon from "@material-ui/icons/Add";
 import Checkbox, { CheckboxProps } from "@material-ui/core/Checkbox";
 
-interface MultipleOpProps {}
+interface MultipleChoiceProps {}
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -32,41 +32,39 @@ const useStyle = makeStyles((theme: Theme) =>
   })
 );
 
-export const MultipleOp: React.FC<MultipleOpProps> = () => {
-  const [check, setCheck] = React.useState({
-    checkedA: false,
-  });
+export const MultipleChoice: React.FC<MultipleChoiceProps> = () => {
 
   const classes = useStyle();
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCheck({ ...check, [event.target.name]: event.target.checked });
+  const handleChangeBox = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const values = [...newAnswer];
+    values[index].rightAnswer = event.target.checked;
+    setNewAnswer(values);
   };
 
 
-  const [newAnswer, setNewAnswer] = useState([{ textAnswer: "" }]);
+  const [newAnswer, setNewAnswer] = useState([{ text: "", rightAnswer: false }]);
 
 
- /*  const handleChangeInput = (index : any, e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (index : number , e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const values = [...newAnswer];
-    values[index].textAnswer[e.target.name] = e.target.value;
+    values[index].text = e.target.value;
     setNewAnswer(values);
 
-  } */
+  }
 
   
 
-  const handleInputChange = ( e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  /* const handleInputChange = ( index : any, e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setNewAnswer({
       ...newAnswer,
       [e.target.name]: e.target.value
     })
-  }
-
+  } */
 
 
   const handleAddNewOption = () => {
-    setNewAnswer([...newAnswer, { textAnswer: "" }]);
+    setNewAnswer([...newAnswer, { text: "", rightAnswer: false }]);
   };
 
   const handleRemoveOption = (index: any) => {
@@ -88,18 +86,17 @@ export const MultipleOp: React.FC<MultipleOpProps> = () => {
           <TextField
             fullWidth
             label="Escribe una respuesta"
-            value={answer.textAnswer}  
-            
-            
-           
+            value={answer.text}  
+            onChange = {event => handleChangeInput(index, event)}
+         
           />
 
           <Grid item xs={1} className={classes.checkbox}>
             <FormControlLabel
               control={
                 <Checkbox
-                  checked={check.checkedA}
-                  onChange={handleChange}
+                  checked={answer.rightAnswer}
+                  onChange={(e) => handleChangeBox(index, e)}
                   name="checkedA"
                   color="primary"
                 />

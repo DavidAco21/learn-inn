@@ -10,26 +10,25 @@ import {
   Paper,
   Grid,
   Button,
-
 } from "@material-ui/core";
 import Video from "ractive-player";
 import ReactPlayer from "react-player";
 import AddIcon from "@material-ui/icons/Add";
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import PropTypes from "prop-types";
 
-import MenuItem from "@material-ui/core/MenuItem";
-import { CreateQuestion } from "../../components/CreateQuestion/CreateQuestion";
 import Typography from "@material-ui/core/Typography";
-import { EndVideo } from "../../components/CreateQuestion/EndVideo";
+import MenuItem from "@material-ui/core/MenuItem";
+import { StudentMC } from "../../components/StudentQuestions/StudentMC";
+import { TrueFalseStudent } from "../../components/StudentQuestions/TrueFalseStudent";
+import { PollStudent } from "../../components/StudentQuestions/PollStudent";
+import { ShortAnswerStudent } from "../../components/StudentQuestions/ShortAnswerStudent";
 
-interface VideoEditProps {}
+interface VideoDoneProps {}
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
     video: {
-      marginTop: "2rem",
+      marginTop: "4rem",
       marginLeft: "2rem",
     },
 
@@ -37,6 +36,11 @@ const useStyle = makeStyles((theme: Theme) =>
       width: "100%",
       display: "flex",
       flexDirection: "row",
+    },
+
+    h1: {
+      fontSize: "1.5rem",
+      marginBottom: ".7em",
     },
 
     paper: {
@@ -65,17 +69,9 @@ const useStyle = makeStyles((theme: Theme) =>
 
     buttonBlue: {
       display: "flex",
-      justifyContent : "flex-start",
-      marginLeft : "67em",
-      marginTop : "1em"
-      
-    },
-
-    h1: {
-      
-        fontSize: "1.5rem",
-        marginBottom : ".7em"
-
+      justifyContent: "flex-start",
+      marginLeft: "66em",
+      marginTop: "1.5em",
     },
 
     floating: {
@@ -85,26 +81,33 @@ const useStyle = makeStyles((theme: Theme) =>
   })
 );
 
-export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
+export const VideoDone: React.FC<VideoDoneProps> = ({}) => {
   const classes = useStyle();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
-  
 
-  const toggleModal = () => {
+  const toggleMultipleChoice = () => {
     setIsModalVisible((wasModalVisible) => !wasModalVisible);
   };
 
+  const [isTrueFalseVisible, setsTrueFalseVisible] = useState(false);
 
-  const [isEndVideolVisible, setEndVideoVisible] = useState(false);
-  
-
-  const toggleEndVideo = () => {
-    setEndVideoVisible((wasEndVideoVisible) => !wasEndVideoVisible);
+  const toggleTrueFalse = () => {
+    setsTrueFalseVisible((wasTrueFalseVisible) => !wasTrueFalseVisible);
   };
 
-  
-  
+  const [isPollVisible, setPollVisible] = useState(false);
+
+  const togglePoll = () => {
+    setPollVisible((wasPollVisible) => !wasPollVisible);
+  };
+
+  const [isShortAnswerVisible, setShortAnswerVisible] = useState(false);
+
+  const toggleShortAnswer = () => {
+    setShortAnswerVisible((wasShortAnswerVisible) => !wasShortAnswerVisible);
+  };
+
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
@@ -130,52 +133,52 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
     }
   }
 
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
-
-    prevOpen.current = open;
-  }, [open]);
-
   return (
     <Grid container className={classes.grid}>
       <Grid item className={classes.video} xs={10}>
         <Typography
-        variant="h1" color="initial" className={classes.h1}
-        >
-          ¡Crea interacciones en el video para tus estudiantes!
-        </Typography>
+          variant="h1"
+          color="initial"
+          className={classes.h1}
+        >Título del video </Typography>
         <ReactPlayer
-         /*  url="https://www.youtube.com/watch?v=t7gRyIENXEU&t" */
-           url ='/videos/video1.mp4' 
+          /*  url="https://www.youtube.com/watch?v=t7gRyIENXEU&t" */
+          url="/videos/video1.mp4"
           width="100%"
           height="85%"
           controls={true}
           loop={true}
         ></ReactPlayer>
-        <CreateQuestion
+
+        <StudentMC
           isModalVisible={isModalVisible}
-          onBackDropClick={toggleModal}
+          onBackDropClick={toggleMultipleChoice}
         />
 
-        <EndVideo
-          isEndVideoVisible={isEndVideolVisible}
-          onPopUpDropClick={toggleEndVideo}>
+        <TrueFalseStudent
+          isTrueFalseVisible={isTrueFalseVisible}
+          onBackQuestionClick={toggleTrueFalse}
+        />
 
-        </EndVideo>
+        <PollStudent
+          isPollVisible={isPollVisible}
+          onBackPollClick={togglePoll}
+        />
 
+        <ShortAnswerStudent
+          isShortAnswerVisible = {isShortAnswerVisible}
+          onBackAnswerClick = {toggleShortAnswer}
+        />
+        
         <Button
-        className = {classes.buttonBlue}
-        variant="contained"
-        color="primary"
-        disableElevation
-        onClick = {toggleEndVideo}> 
-        Finalizar Video
+          className={classes.buttonBlue}
+          variant="contained"
+          color="primary"
+          disableElevation
+        >
+          Crear Pregunta
         </Button>
       </Grid>
-
       <Grid item xs={1} className={classes.floating}>
         <Fab
           color="primary"
@@ -212,14 +215,25 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
                     id="menu-list-grow"
                     onKeyDown={handleListKeyDown}
                   >
-                    <MenuItem onClick={toggleModal} className={classes.menuFab}>
-                      Crear Pregunta
+                    <MenuItem
+                      onClick={toggleMultipleChoice}
+                      className={classes.menuFab}
+                    >
+                      Ver M. Choice
                     </MenuItem>
-                    {/* <MenuItem onClick={togglePoll} className={classes.menuFab}>
-                      Crear Encuesta
-                    </MenuItem> */}
+                    <MenuItem
+                      onClick={toggleTrueFalse}
+                      className={classes.menuFab}
+                    >
+                      Ver T or F
+                    </MenuItem>
+                    <MenuItem  onClick={toggleShortAnswer} className={classes.menuFab}>
+                      Ver ShortA
+                    </MenuItem> 
+                    <MenuItem  onClick={togglePoll} className={classes.menuFab}>
+                      Ver Poll
+                    </MenuItem> 
                   </MenuList>
-                  
                 </ClickAwayListener>
               </Paper>
             </Grow>

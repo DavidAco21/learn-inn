@@ -3,25 +3,25 @@ import Avatar from "@material-ui/core/Avatar";
 
 export const CoursesData = [
   {
-    title: "Clase 1",
+    title: "Algoritm.",
     id: 1,
-    icon: "C1",
+    icon: "WA",
     path :"/courses/",
     cName: "course-icon",
   },
 
   {
     id: 2,
-    title: "Clase 2",
-    icon: "C2",
+    title: "Pro. Web",
+    icon: "PW",
     path :"/courses/",
     cName: "course-icon",
   },
 
   {
     id: 3,
-    title: "Clase 3",
-    icon: "C3",
+    title: "Web Adv.",
+    icon: "AL",
     path :"/courses/",
     cName: "course-icon",
   },

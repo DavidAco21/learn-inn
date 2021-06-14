@@ -31,6 +31,7 @@ import { LoginSign } from "../LoginSign/LoginSign";
 import { Curso } from "../Curso/Curso";
 import { VideoEdit } from "../VideoEdit/VideoEdit";
 import { LEARNIN_COLLECTION } from "../../utils/firebase";
+import { VideoDone } from "../VideoDone/VideoDone";
 
 LEARNIN_COLLECTION.collection('questions').add (
   {
@@ -54,8 +55,6 @@ LEARNIN_COLLECTION.collection('questions').add (
     ],
    
   },
-
-    
 
 
     }
@@ -82,7 +81,7 @@ export const App = () => {
                 <Route path="/community" component={Community} />
                 <Route path="/courses/:id" component={Curso} />
                 <Route path="/video" component={VideoEdit} />
-               
+                <Route path="/videoDone" component={VideoDone} />
               </Nav>
             </Switch>
           </BrowserRouter>

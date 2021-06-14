@@ -19,11 +19,16 @@ import {
   Theme,
   Typography,
 } from "@material-ui/core";
-import { MultipleOp } from "./MultipleOp";
+import { MultipleChoice } from "./MultipleChoice";
+import { ShortAnswer } from "./ShortAnswer";
+import { TrueQuestion } from "./TrueQuestion";
+import { Poll } from "./Poll";
 
 interface CreateQuestionProps {
   isModalVisible: Boolean;
+  
   onBackDropClick: () => void;
+  
 }
 
 const useStyle = makeStyles((theme: Theme) =>
@@ -48,9 +53,8 @@ const useStyle = makeStyles((theme: Theme) =>
       flexDirection: "column",
       alignItems: "center",
       width: "100%",
-      backgroundColor: "rgba(255, 255, 255, 0.8)",
-      backdropFilter: "blur(7px)",
-      borderRadius: 15,
+      backgroundColor: "rgba(255, 255, 255)",
+      borderRadius: 5,
       backgroundImage:
         "linear-gradiant(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0))",
 
@@ -107,20 +111,28 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
     {
       "nombre": "Opción Múltiple",
       "componente": [ <Grid item xs={12}>
-                     <MultipleOp >  </MultipleOp>
+                     <MultipleChoice >  </MultipleChoice>
+                     
                      </Grid> ]
     },
     {
       "nombre": "Verdadero o Falso",
       "componente": [ <Grid item xs={12}>
-                     <p> Verdadero o Falso </p>
+                      <TrueQuestion></TrueQuestion>
                      </Grid> ]
     },
 
     {
       "nombre": "Respuesta Corta",
       "componente": [ <Grid item xs={12}>
-                     <p> Respuesta corta </p>
+                      <ShortAnswer></ShortAnswer>
+                     </Grid> ]
+    },
+
+    {
+      "nombre": "Encuesta",
+      "componente": [ <Grid item xs={12}>
+                      <Poll></Poll>
                      </Grid> ]
     }
   ]
@@ -135,10 +147,8 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
     setType(event.target.value as number); 
         
         console.log(type)
- 
    
   };
-
 
 
 

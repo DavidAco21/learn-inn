@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import Button from "@material-ui/core/Button";
 import {
   createStyles,
@@ -21,17 +21,17 @@ import { Route, useHistory, useParams } from "react-router";
 import { CoursesData } from "../CoursesPreview/CoursesData";
 import { UploadVideo } from "../UploadVideo/UploadVideo";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
+import miniatura from "../../images/renders/miniatura.png";
 
+import { Link } from "react-router-dom";
+import { CardList } from "../CardListVideos/CardList";
+import { VideosPreviewData } from "../CardListVideos/VideosPreviewData";
 
 interface VideosPreviewProps {}
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      display: "flex",
-      marginLeft: "8em"
-    },
+  
     paper: {
       marginRight: theme.spacing(2),
     },
@@ -40,26 +40,19 @@ const useStyle = makeStyles((theme: Theme) =>
       margin: "0px",
     },
 
-    fab: {
-      display: "flex",
-      justifyItems: "flex-start",
-      marginTop: "30em",
-    },
-
-    menuFab: {
-        borderRadius: 30,
-        color: theme.palette.primary.main,
-       
-
-    },
-
+ 
     menuPaper: {
-        marginBottom: "1rem",
-        marginTop: "1rem",
-        backgroundColor: "rgba(255, 255, 255, 0.4)",
-        backdropFilter: "blur(7px)",
-        borderRadius: 30,
-    }
+      marginBottom: "1rem",
+      marginTop: "1rem",
+      backgroundColor: "rgba(255, 255, 255, 0.4)",
+      backdropFilter: "blur(7px)",
+      borderRadius: 30,
+    },
+
+    card: {
+      marginTop: "3em", 
+      marginLeft: "-10em"
+    },
   })
 );
 
@@ -76,8 +69,6 @@ export const VideosPreview: React.FC<VideosPreviewProps> = () => {
     if (
       anchorRef.current &&
       anchorRef.current.contains(event.target as HTMLElement)
-      
-      
     ) {
       return;
     }
@@ -85,14 +76,13 @@ export const VideosPreview: React.FC<VideosPreviewProps> = () => {
     setOpen(false);
   };
 
-  const {id} = useParams<{ id : string}> ();
-  const course = CoursesData.find(item => item.id== parseInt(id));
+  const { id } = useParams<{ id: string }>();
+  const course = VideosPreviewData.find((item) => item.id == parseInt(id));
 
   const history = useHistory();
 
   const handleNewVideo = (event: React.ChangeEvent<{}>, newValue: number) => {
     history.push(`/courses/${course?.id}/uploadvideo`);
-
   };
 
   function handleListKeyDown(event: React.KeyboardEvent) {
@@ -112,72 +102,30 @@ export const VideosPreview: React.FC<VideosPreviewProps> = () => {
   }, [open]);
 
   return (
-    <Grid container spacing={1}>
-      <Grid
-        item
-        lg={12}
-        direction="row-reverse"
-        justify="flex-start"
-        alignItems="flex-end"
-        className={classes.fab}
-      >
-        {/* <Fab
-          color="primary"
-          aria-label="add"
-          ref={anchorRef}
-          aria-controls={open ? "menu-list-grow" : undefined}
-          aria-haspopup="true"
-          onClick={handleToggle}
-        >
-          <AddIcon />
-        </Fab> */}
-      </Grid>
-      <div className={classes.root}>
-        <Typography
-        variant = "h1">
-          Lista de videos
-        </Typography>
-        {/* <Paper className={classes.paper}></Paper>
-        <div>
-
-          <Popper
-            open={open}
-            anchorEl={anchorRef.current}
-            role={undefined}
-            transition
-            disablePortal
+    <Grid container xs = {12} >
+      {VideosPreviewData.map((item, index) => {
+        return (
+          <Grid
+            container
+            spacing={1}
+            xs={8}
+            direction="row"
+            key={index}
+            alignContent="stretch"
+            className = {classes.card}
           >
-            {({ TransitionProps, placement }) => (
-              <Grow
-                {...TransitionProps}
-                style={{
-                  transformOrigin:
-                    placement === "bottom" ? "center top" : "center bottom",
-                }}
-              >
-                
-                <Paper className= {classes.menuPaper} >
-                  <ClickAwayListener onClickAway={handleClose}>
-                    <MenuList
-                      autoFocusItem={open}
-                      id="menu-list-grow"
-                      onKeyDown={handleListKeyDown}
-                    >
-                      <Link to={`/courses/${course?.id}/subirVideo`}>
-                      <MenuItem onClick={handleClose} className = {classes.menuFab} >
-                        Crear Nuevo Video
-                      </MenuItem>
-                      </Link>
-                    </MenuList>
-                  </ClickAwayListener>
-                </Paper>
-              </Grow>
-            )}
-          </Popper> */}
-        </div>
-       
-        
-    
+            <Grid item direction="row" >
+              <CardList
+                clase={item.curse}
+                image={miniatura}
+                title_video={item.title}
+              />
+            </Grid>
+          </Grid>
+        );
+      })}
+
+  
     </Grid>
   );
 };

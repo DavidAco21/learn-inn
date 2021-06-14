@@ -3,31 +3,13 @@ export interface QuestionType {
   name: string;
   description?: string;
   duration: number;
-  type: number;
+  type: 'multipleChoice'|'boolean'|'shortAnswer'|'poll';
   createdBy: string;
+  time: number;
 
-
-  option: {
-    multipleChoice: [
-      {
-        answer: string;
-        rightAnswer: boolean;
-      }
-    ];
-    trueOrFalse: [
-        {
-            answer: string;
-            rightAnswer: boolean;
-        },
-        {
-            answer: string;
-            rightAnswer: boolean;
-        }
-    ];
-    shortAnswer: {
-      isShortAnswer: boolean;
-    };
-  };
-
-
+  options: {
+    text: string,
+    rightAnswer?: boolean;
+  }[];
 }
+

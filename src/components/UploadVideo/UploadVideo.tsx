@@ -25,10 +25,10 @@ const useStyle = makeStyles((theme: Theme) =>
     },
 
     h1: {
-      fontSize: "1.5em",
+      fontSize: "1.3em",
       textAlign: "center",
-      marginLeft: "9em",
-      marginTop: "1em",
+      marginLeft: "7em",
+      marginTop: "5em",
     },
 
     btn: {
@@ -65,8 +65,8 @@ export const UploadVideo: React.FC<UploadVideoProps> = ({}) => {
 
   return (
     <Grid container alignContent="center" className={classes.grid} lg={12}>
-      <Typography className={classes.h1} variant="h1">
-        Nuevo Video
+      <Typography className={classes.h1} variant="h3">
+        ¡Carga aquí tu nuevo video!
       </Typography>
       <Grid item xs = {12} className = {classes.btn}>
       <Button variant="contained" component="label" onClick = {handleVideo} >

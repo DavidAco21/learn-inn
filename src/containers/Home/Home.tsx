@@ -6,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import image_banner from "../../images/renders/saly.png";
-import miniVideo from "../../images/renders/miniVideo.png";
+import miniVideo from "../../images/renders/miniaturaWeb.png";
 import {
   createStyles,
   makeStyles,
@@ -125,7 +125,7 @@ export const Home: React.FC<HomeProps> = ({}) => {
                 clase={item.title}
                 icon={item.icon}
                 image={miniVideo}
-                title_video="Introdcción a los Hooks-React"
+                title_video="Introducción a los Hooks-React"
               />
             </Grid>
           </Grid>

@@ -14,7 +14,8 @@ const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  backdrop-filter: blur(30px);
+  backgroud-color: "00000";
+  backdrop-filter: blur(100px);
 `;
 
 const ModalVideo: React.FC<ModalVideoProps> = ({ onBackDropClick, children }) => {
