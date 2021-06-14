@@ -23,11 +23,13 @@ import { MultipleChoice } from "./MultipleChoice";
 import { ShortAnswer } from "./ShortAnswer";
 import { TrueQuestion } from "./TrueQuestion";
 import { Poll } from "./Poll";
+import { QuestionType } from "../../utils/QuestionType";
 
 interface CreateQuestionProps {
   isModalVisible: Boolean;
   
   onBackDropClick: () => void;
+  onNewQuestion: (question: QuestionType) => void;
   
 }
 
@@ -97,6 +99,7 @@ const useStyle = makeStyles((theme: Theme) =>
 export const CreateQuestion: React.FC<CreateQuestionProps> = ({
   isModalVisible,
   onBackDropClick,
+  onNewQuestion
 }) => {
   const classes = useStyle();
 
@@ -144,10 +147,7 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
  
 
   const handleType = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setType(event.target.value as number); 
-        
-        console.log(type)
-   
+    setType(event.target.value as number);
   };
 
 
@@ -156,6 +156,43 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
     return null;
   }
 
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+
+    const target: any = event.target;
+    const typeInt = target.type.value;
+
+    const question: QuestionType = {
+      createdBy: '',
+      time: 0,
+      type: 'boolean',
+      duration: parseInt(target.duration.value),
+      id: Date.now(),
+      name: target.name.value,
+      description: target.description.value,
+    }
+
+    switch(typeInt) {
+      case '0':
+        question.type = 'multipleChoice';
+        question.options = JSON.parse(target.multipleChoice.value);
+        break;
+      case '1':
+        question.type = 'boolean';
+        question.value = target.boolean.value === 'true';
+        break;
+      case '2':
+        question.type = 'shortAnswer';
+        break;
+      case '3':
+        question.type = 'poll';
+        question.options = JSON.parse(target.poll.value);
+        break;
+    }
+
+    onNewQuestion(question);
+    target.reset();
+  }
  
 
   return (
@@ -167,14 +204,13 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
             <Typography component="h1" variant="h6">
               Crea tu pregunta
             </Typography>
-            <form className={classes.form} noValidate>
+            <form className={classes.form} noValidate onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
                   <TextField
                     className={classes.textField}
-                    id="standard-basic"
                     autoComplete="fname"
-                    name="firstName"
+                    name="name"
                     required
                     fullWidth
                     label="Escribe tu pregunta"
@@ -186,8 +222,8 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                   <TextField
                     variant="filled"
                     fullWidth
-                    id="filled-basic"
                     label="Puedes añadir una descripción"
+                    name="description"
                   />
                 </Grid>
 
@@ -213,8 +249,7 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                         displayEmpty
                         className={classes.selectEmpty}
                         inputProps={{ "aria-label": "Without label" }}
-
-                        
+                        name="duration"
                       >
                         
                         <MenuItem value="" disabled>
@@ -241,7 +276,7 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                         displayEmpty
                         className={classes.selectEmpty}
                         inputProps={{ "aria-label": "Without label" }}
-
+                        name="type"
                       >
                         
                         <MenuItem value={-1} disabled>  Tipo de respuesta </MenuItem>
@@ -266,7 +301,7 @@ export const CreateQuestion: React.FC<CreateQuestionProps> = ({
                   (
                     categorias[type].componente.map((item, index)=>(
 
-                      <MenuItem key = {"componente"+index} value = ""> {item}</MenuItem>
+                      item
                     
                     
                     ))

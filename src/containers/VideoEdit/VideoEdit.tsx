@@ -23,8 +23,12 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { CreateQuestion } from "../../components/CreateQuestion/CreateQuestion";
 import Typography from "@material-ui/core/Typography";
 import { EndVideo } from "../../components/CreateQuestion/EndVideo";
+import { BaseReactPlayerProps } from "react-player/base";
+import { QuestionType } from "../../utils/QuestionType";
 
-interface VideoEditProps {}
+interface VideoEditProps {
+  onNewQuestion: (question: QuestionType) => void;
+}
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -85,7 +89,7 @@ const useStyle = makeStyles((theme: Theme) =>
   })
 );
 
-export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
+export const VideoEdit: React.FC<VideoEditProps> = ({ onNewQuestion }) => {
   const classes = useStyle();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -139,6 +143,18 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
     prevOpen.current = open;
   }, [open]);
 
+
+  const [ currentProgress, setCurrentProgress ] = React.useState(0);
+  const handleProgress: BaseReactPlayerProps['onProgress'] = ({ playedSeconds }) => {
+    setCurrentProgress(playedSeconds);
+  }
+
+  const handleNewQuestion = (question: QuestionType) => {
+    question.time = currentProgress;
+    onNewQuestion(question);
+    setIsModalVisible(false);
+  }
+
   return (
     <Grid container className={classes.grid}>
       <Grid item className={classes.video} xs={10}>
@@ -148,8 +164,9 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
           ¡Crea interacciones en el video para tus estudiantes!
         </Typography>
         <ReactPlayer
-         /*  url="https://www.youtube.com/watch?v=t7gRyIENXEU&t" */
-           url ='/videos/video1.mp4' 
+          onProgress={handleProgress}
+          /*  url="https://www.youtube.com/watch?v=t7gRyIENXEU&t" */
+          url ='/videos/video1.mp4'
           width="100%"
           height="85%"
           controls={true}
@@ -158,6 +175,7 @@ export const VideoEdit: React.FC<VideoEditProps> = ({}) => {
         <CreateQuestion
           isModalVisible={isModalVisible}
           onBackDropClick={toggleModal}
+          onNewQuestion={handleNewQuestion}
         />
 
         <EndVideo

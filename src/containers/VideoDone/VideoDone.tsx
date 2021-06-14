@@ -22,8 +22,13 @@ import { StudentMC } from "../../components/StudentQuestions/StudentMC";
 import { TrueFalseStudent } from "../../components/StudentQuestions/TrueFalseStudent";
 import { PollStudent } from "../../components/StudentQuestions/PollStudent";
 import { ShortAnswerStudent } from "../../components/StudentQuestions/ShortAnswerStudent";
+import { QuestionType } from "../../utils/QuestionType";
+import { BaseReactPlayerProps } from "react-player/base";
+import StudentQuestionModal from "../../components/StudentQuestionModal/StudentQuestionModal";
 
-interface VideoDoneProps {}
+interface VideoDoneProps {
+  questions: QuestionType[];
+}
 
 const useStyle = makeStyles((theme: Theme) =>
   createStyles({
@@ -81,7 +86,7 @@ const useStyle = makeStyles((theme: Theme) =>
   })
 );
 
-export const VideoDone: React.FC<VideoDoneProps> = ({}) => {
+export const VideoDone: React.FC<VideoDoneProps> = ({ questions }) => {
   const classes = useStyle();
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -133,6 +138,28 @@ export const VideoDone: React.FC<VideoDoneProps> = ({}) => {
     }
   }
 
+  const [ playing, setPlaying ] = React.useState(false);
+  const handlePause = () => setPlaying(false);
+  const handlePlay = () => setPlaying(true);
+
+  const [ answeredQuestions, setAnsweredQuestions ] = React.useState<number[]>([]);
+  const [ activeQuestion, setActiveQuestion ] = React.useState<QuestionType | null>(null);
+  const handleProgress: BaseReactPlayerProps['onProgress'] = ({ playedSeconds }) => {
+    questions.forEach((question) => {
+      // que el tiempo del video sea mayor al tiempo de la pregunta y que esta pregunta no haya sido respondida
+      if(playedSeconds > question.time  && !answeredQuestions.includes(question.id)) {
+        setActiveQuestion(question);
+        setPlaying(false);
+      }
+    });
+  }
+
+  const handleQuestionClose = () => {
+    setAnsweredQuestions(prev => ([ ...prev, activeQuestion!.id ]));
+    setActiveQuestion(null);
+    handlePlay();
+  }
+
   return (
     <Grid container className={classes.grid}>
       <Grid item className={classes.video} xs={10}>
@@ -148,27 +175,16 @@ export const VideoDone: React.FC<VideoDoneProps> = ({}) => {
           height="85%"
           controls={true}
           loop={true}
+          onProgress={handleProgress}
+          playing={playing}
+          onPause={handlePause}
+          onPlay={handlePlay}
         ></ReactPlayer>
 
-        <StudentMC
-          isModalVisible={isModalVisible}
-          onBackDropClick={toggleMultipleChoice}
-        />
-
-        <TrueFalseStudent
-          isTrueFalseVisible={isTrueFalseVisible}
-          onBackQuestionClick={toggleTrueFalse}
-        />
-
-        <PollStudent
-          isPollVisible={isPollVisible}
-          onBackPollClick={togglePoll}
-        />
-
-        <ShortAnswerStudent
-          isShortAnswerVisible = {isShortAnswerVisible}
-          onBackAnswerClick = {toggleShortAnswer}
-        />
+        {activeQuestion && <StudentQuestionModal
+          question={activeQuestion}
+          onQuestionClose={handleQuestionClose}
+          />}
         
         <Button
           className={classes.buttonBlue}

@@ -75,6 +75,7 @@ export const MultipleChoice: React.FC<MultipleChoiceProps> = () => {
 
   return (
     <Grid container>
+      <input type="hidden" value={JSON.stringify(newAnswer)} name="multipleChoice" />
       {newAnswer.map((answer, index) => (
         <Grid
           key={index}

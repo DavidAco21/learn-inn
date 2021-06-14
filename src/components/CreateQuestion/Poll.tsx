@@ -33,16 +33,8 @@ import {
   );
   
   export const Poll: React.FC<PollProps> = () => {
-    const [check, setCheck] = React.useState({
-      checkedA: false,
-    });
-  
+
     const classes = useStyle();
-  
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      setCheck({ ...check, [event.target.name]: event.target.checked });
-    };
-  
   
     const [newAnswer, setNewAnswer] = useState([{ text: "", rightAnswer: false }]);
 
@@ -53,10 +45,6 @@ import {
     setNewAnswer(values);
 
   }
-  
-  
-  
-  
     const handleAddNewOption = () => {
       setNewAnswer([...newAnswer, { text: "", rightAnswer : false }]);
     };
@@ -69,6 +57,7 @@ import {
   
     return (
       <Grid container>
+        <input type="hidden" value={JSON.stringify(newAnswer)} name="poll" />
         {newAnswer.map((answer, index) => (
           <Grid
             key={index}

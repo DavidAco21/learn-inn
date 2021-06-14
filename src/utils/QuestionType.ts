@@ -7,7 +7,8 @@ export interface QuestionType {
   createdBy: string;
   time: number;
 
-  options: {
+  value?: boolean; // only for boolean type
+  options?: {
     text: string,
     rightAnswer?: boolean;
   }[];
